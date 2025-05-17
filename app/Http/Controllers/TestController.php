@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Profile;
+use App\Models\Post;
 
 
 class TestController extends Controller
@@ -52,8 +54,29 @@ class TestController extends Controller
         $users = User::whereIn('id', [102, 103, 104])->delete(); // para eliminar varios registros
         return ["message" => "Users deleted successfully"];
         */ 
-        $user = User::find(102);
+        $user = User::find(100);
         $user->delete();
         return ["message" => "User deleted successfully"];
     }
+
+    public function getUserById($id){
+
+        $profile = Profile::find($id);
+        $user = User::find($id);
+        return $user->profile->address;
+        //return $profile->user;
+    }
+
+    public function getPosts(){
+        $posts = Post::paginate(10);
+        //$categories = Category::find(101);
+        return view('test.posts', compact('posts'));
+    }
+
+    public function general(){
+
+        $category = Category::find(1);
+        return $category->posts;
+}
+
 }

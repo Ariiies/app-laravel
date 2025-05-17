@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //RELACION UNO A UNO con la tabla profiles
+    public function profile(){
+        
+       // return $this->hasOne(Profile::class, 'user_id', 'id'); // si no has seguido als convcenciones de laravel se tiuene que especificar el nombre de la columna foranea y la columna local
+        return $this->hasOne(Profile::class);
+    }
+
+    //RELACION UNO A MUCHOS con la tabla posts
+    public function posts(){
+        return $this->hasMany(Post::class, 'user_id', 'id'); // si no has seguido als convcenciones de laravel se tiuene que especificar el nombre de la columna foranea y la columna local
+    }
 }
