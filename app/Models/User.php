@@ -57,4 +57,8 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class, 'user_id', 'id'); // si no has seguido als convcenciones de laravel se tiuene que especificar el nombre de la columna foranea y la columna local
     }
+
+    public function address(){
+        return $this->hasOneThrough(Address::class, Profile::class, 'user_id', 'profile_id', 'id', 'id'); // si no has seguido las convcenciones de laravel se tiuene que especificar el nombre de la columna foranea y la columna local
+    }
 }

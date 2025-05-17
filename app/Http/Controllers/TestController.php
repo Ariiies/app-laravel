@@ -63,8 +63,9 @@ class TestController extends Controller
 
         $profile = Profile::find($id);
         $user = User::find($id);
-        return $user->profile->address;
+        //return $user->profile->address;
         //return $profile->user;
+        return $user->address;
     }
 
     public function getPosts(){
